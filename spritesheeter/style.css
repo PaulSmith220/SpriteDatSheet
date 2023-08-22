@@ -1,0 +1,95 @@
+body {
+    background-color: #eee;
+}
+
+#animation {
+    display: block;
+    background-color: blue;
+    width: 500px;
+    height: 500px;
+}
+
+#animation.active {
+    background-color: transparent;
+}
+
+#animationSelector {
+
+}
+
+#fpsValue {
+    margin-left: 16px;
+}
+
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 250px;
+
+  }
+
+  #drop-area > form {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  #drop-area.highlight {
+    border-color: purple;
+  }
+  p {
+    margin-top: 0;
+  }
+  .drop-form {
+    margin-bottom: 10px;
+  }
+  #gallery {
+    margin-top: 10px;
+  }
+  #gallery img {
+    width: 50px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  #gallery img:hover {
+    cursor: pointer;
+    background:  #718ba9;
+  }
+
+  #gallery img.selected {
+    border: 3px dashed #718ba9;
+  }
+
+
+  .button {
+    display: inline-block;
+    padding: 10px;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  #fileElem {
+    display: none;
+  }
+
+
+#spritesheet, #playback {
+
+
+
+}
+
+#spritesheet {
+  max-width: 100%;
+}
+
+#playback {
+
+}

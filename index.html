@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Spritesheet</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+    <script src="spritesheeter/index.js"></script>
+    <script src="spritesheeter/drop-functions.js"></script>
+    <script src="spritesheeter/animationSelector.js"></script>
+    <script src="spritesheeter/canvas.js"></script>
+    <script src="spritesheeter/JSONformats.js"></script>
+    <link rel="stylesheet" href="spritesheeter/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+            &nbsp;
+            <i class="bi-map-fill  fs-4"></i> SpriteDatSheet
+        </a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32"
+                        data-view-component="true" class="">
+                        <path fill="#fff"
+                            d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
+                        </path>
+                    </svg>
+                    Github
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 d-none d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <div class="card" style="">
+                        <canvas id="playback" class="card-img-top" height="200"></canvas>
+                        <div class="card-body">
+                            <h5 class="card-title">Preview</h5>
+                            <label for="customRange3" class="form-label">FPS</label>
+                            <input type="range" class="form-range" min=".5" max="30" step="0.5" id="fpsPicker"
+                                value="3.5">
+
+                            <p class="card-text"><i class="bi-2-circle-fill text-primary fs-4"></i> Add new animation
+                                and preview it here</p>
+                            <label for="animationSelector" class="form-label">Active animation</label>
+                            <select class="form-select" id="animationSelector" value="">
+                                <option>No Animations so far</option>
+                            </select>
+                            <br />
+                            <div class="d-grid gap-2 d-md-flex justify-content-between">
+                                <button id="addAnimaton" class="btn  btn-primary col-md-10 "><i
+                                        class="bi-plus-circle"></i> Add animation</button>
+                                <button id="deleteAnimation" class="btn btn-outline-danger" title="Delete animation"><i
+                                        class="bi-trash-fill"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h5 class="card-title">Spritesheet properties</h5>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="checkbox" class="form-check-input" checked id="labelToggle"
+                                    name="labelToggle" />
+                                <label for="labelToggle" class="form-check-label">Print animation names</label>
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" class="form-check-input" id="bordersToggle"
+                                    name="bordersToggle" />
+                                <label for="bordersToggle" class="form-check-label">Add frame borders</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-9 pt-3 px-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        Working area
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#helpModal">
+                            How it works <i class="bi-question-circle-fill"></i>
+                        </button>
+                    </h1>
+
+                    <div>
+                        <label>
+                            <i class="bi-4-circle-fill text-primary fs-4"></i>
+                            Download your spritesheet here:
+                        </label>
+                        <div class="btn-group" role="group">
+                            <button id="downloadPNG" class="btn btn-outline-primary">Download PNG</button>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Download JSON
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button id="downloadJSONPixie" class="dropdown-item">PixieJS, UnrealEngine</button></li>
+                                    <li><button id="downloadJSONPhaser3" class="dropdown-item">Phaser 3</button></li>
+                                    <li><button id="downloadJSONGodot" class="dropdown-item">Godot</button></li>
+                                    <li><button id="downloadJSONArray" class="dropdown-item">JSON Array</button></li>
+                                    <li><button id="downloadJSONHash" class="dropdown-item">JSON Hash</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="drop-area" class="align-items-center pb-2 mb-3">
+                    <form class="">
+                        <p><i class="bi-1-circle-fill text-primary fs-4"></i> Drag image files here or paste images
+                            from
+                            clipboard</p>
+                        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                        <label class="button" for="fileElem">Select some files</label>
+                    </form>
+                    <div class="d-flex  flex-wrap flex-wrap align-items-center pb-2 mb-3 border-bottom" id="gallery">
+                    </div>
+                    <p><i class="bi-3-circle-fill text-primary fs-4"></i> Mark the frames you'd like to appear in
+                        selected animation</p>
+                </div>
+                <div class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Spritesheet</h5>
+                            <canvas id="spritesheet"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+
+
+
+        </div>
+    </div>
+
+    </div>
+
+    <div class="modal fade modal-lg" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="helpModalLabel">
+                        <i class="bi-map-fill  fs-4"></i> SpriteDatSheet -
+                        How to use it </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    This software allows you to pack your animation frames into a spritesheet (characters, assets, etc)
+                    to use in the popular 2D engines (e.g PixieJS).
+                    <hr />
+                    <h3>This is how you use it:</h3>
+                    <ol>
+                        <li>
+                            Grab your PNG files and drop them in the drop area (marked with <i
+                                class="bi-1-circle-fill text-primary"></i>).<br />
+                            Alternatively, you could paste the image (or a group of images) from the clipboard: copy it,
+                            click the drop area and press Ctrl+V (Windows) or Cmd+V (Mac).
+                            You will see your files appearing underneath.
+                        </li>
+                        <li>
+                            In the sidebar on the left click <button class="btn  btn-primary btn-sm">
+                                <iclass="bi-plus-circle"></i> Add animation
+                            </button>.
+                            The prompt will appear - enter
+                            the name of the animation in prompt (e.g. "Running_left").
+                            <p>The animation will be created and automatically selected as "<b>Active anmiation</b>"</p>
+                        </li>
+                        <li>
+                            <p>
+                                In the working area click on the frames (marked with <i
+                                    class="bi-3-circle-fill text-primary"></i>) you'd like to be a part of the selected
+                                animation in the order you want them.
+                            </p>
+                            <p>
+                                You will immediately see the animation preview in the sidebar on the left. Feel free to
+                                adjust the FPS to your needs (it's only affecting the preview).
+                            </p>
+                            <p>
+                                You will also immediately see the spritesheet preview under the working area. It's
+                                scaled down to fit the window, don't worry, you're getting it in full resolution later.
+                            </p>
+                        </li>
+                        <li>
+                            Configure spritesheet to your needs using checkboxes in the "<b>Spritesheet properties</b>"
+                            section of the sidebar
+                        </li>
+                        <li>
+                            <p>
+                                Add more animations using <button class="btn  btn-primary btn-sm">
+                                    <iclass="bi-plus-circle"></i> Add animation
+                                </button>
+                            </p>
+                            <p>
+                                Delete selected animation using <button class="btn btn btn-outline-danger btn-sm"><i
+                                        class="bi-trash-fill"></i></button>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Once you're happy with the result - go to the download section (marked with <i
+                            class="bi-4-circle-fill text-primary"></i>).
+                            </p>
+                            <p>
+                                Use <button class="btn btn-outline-primary btn-sm">Download PNG</button> to download the complete spritesheet PNG image.
+                            </p>
+                            <p>
+                                Use <button class="btn btn-outline-primary btn-sm">Download JSON</button> to download the spritesheet data file in the format of your choice.
+                            </p>
+                        </li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
