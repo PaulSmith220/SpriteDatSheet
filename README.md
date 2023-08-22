@@ -7,6 +7,8 @@ It doesn't upload your assets anywhere, works right in your browser.
 
 Give it a try: 
 
+![](./screen.jpg)
+
 ## This is how you use it:
 > You will find more detailed instruction if you click [How it works :grey_question:] button next to the working area.
 
