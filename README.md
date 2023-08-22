@@ -5,7 +5,7 @@ This software allows you to pack your animation frames into a spritesheet (chara
 
 It doesn't upload your assets anywhere, works right in your browser.
 
-Give it a try: 
+Give it a try: [https://paulsmith220.github.io/SpriteDatSheet/](https://paulsmith220.github.io/SpriteDatSheet/)
 
 ![](./screen.jpg)
 
