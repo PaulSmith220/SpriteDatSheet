@@ -70,8 +70,8 @@ function formatForPhaser3(data) {
           h: frame.height,
         },
         spriteSourceSize: {
-          x: frame.x,
-          y: frame.y,
+          x: 0,
+          y: 0,
           w: frame.width,
           h: frame.height,
         },
