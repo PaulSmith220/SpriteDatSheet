@@ -42,19 +42,29 @@ function formatForPixieJS(data) {
 function formatForUnity2D(data) {}
 
 function formatForPhaser3(data) {
+  const $canvas = document.getElementById("spritesheet");
   const result = {
-    frames: {},
+    frames: [],
     meta: {
       app: "SpriteDatSheet",
+      format: "RGBA8888",
+      image: "spritesheet.png",
+      scale: 1,
+      size: {
+        w: $canvas.width,
+        h: $canvas.height,
+      },
     },
   };
 
   data.animations.forEach((animation) => {
     animation.frames.forEach((frame, index) => {
-      const frameName = `${animation.name}_${index + 1}`;
-      result.frames[frameName] = {
+      const number = `${index + 1}`.padStart(4, "0");
+      const frameName = `${animation.name}_${number}`;
+      result.frames.push({
+        filename: frameName,
         rotated: false,
-        trimmed: false,
+        trimmed: true,
         sourceSize: {
           w: frame.width,
           h: frame.height,
@@ -71,7 +81,7 @@ function formatForPhaser3(data) {
           w: frame.width,
           h: frame.height,
         },
-      };
+      });
     });
   });
   return result;
